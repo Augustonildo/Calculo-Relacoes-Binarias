@@ -7,7 +7,15 @@ int **matrizRelacoes;
 int *listaElementos;
 int numeroNos;
 
-void limpaValoresMatrizRelacoes(){
+void inicializaMatrizRelacoes(){
+    fscanf(arquivoEntrada,"%d", &numeroNos);
+    listaElementos = (int *) malloc (sizeof(int) * numeroNos);
+    matrizRelacoes = (int **) malloc (sizeof(int *) * numeroNos);
+    for(int i = 0; i < numeroNos; i++){
+        fscanf(arquivoEntrada, " %d", &listaElementos[i]);
+        matrizRelacoes[i] = (int *) malloc (sizeof(int) * numeroNos);
+    }
+
     for(int i = 0; i < numeroNos; i++){
         for(int j = 0; j < numeroNos; j++){
             matrizRelacoes[i][j] = 0;
@@ -161,14 +169,7 @@ int main(int argc, char **argv){
     arquivoSaida = fopen("saida.txt", "w");
 
     //Aloca espaço para matriz e vetor, preenchendo os elementos
-    fscanf(arquivoEntrada,"%d", &numeroNos);
-    listaElementos = (int *) malloc (sizeof(int) * numeroNos);
-    matrizRelacoes = (int **) malloc (sizeof(int *) * numeroNos);
-    for(int i = 0; i < numeroNos; i++){
-        fscanf(arquivoEntrada, " %d", &listaElementos[i]);
-        matrizRelacoes[i] = (int *) malloc (sizeof(int) * numeroNos);
-    }
-    limpaValoresMatrizRelacoes();
+    inicializaMatrizRelacoes();
 
     //Lê relações e preenche matriz
     int relacaoPontoA = 0;
