@@ -85,16 +85,14 @@ int verificaAntiSimetrica(){
 
     printf("\n4. Anti-simetrica: ");
     for(int i = 0; i < numeroNos; i++){
-        for(int j = 0; j < numeroNos; j++){
-            if(i != j){
-                if(matrizRelacoes[i][j] == matrizRelacoes[j][i]){
-                    if(indAntiSimetrica){
-                        printf("F \n   ");
-                        indAntiSimetrica = 0;
-                    }
-                    printf("(%d,%d) e (%d,%d); ",
-                        listaElementos[i], listaElementos[j], listaElementos[j], listaElementos[i]);
+        for(int j = i+1; j < numeroNos; j++){
+            if(matrizRelacoes[i][j] && matrizRelacoes[j][i]){
+                if(indAntiSimetrica){
+                    printf("F \n   ");
+                    indAntiSimetrica = 0;
                 }
+                printf("(%d,%d) e (%d,%d); ",
+                    listaElementos[i], listaElementos[j], listaElementos[j], listaElementos[i]);
             }
         }
     }
