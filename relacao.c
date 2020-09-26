@@ -22,7 +22,7 @@ int verificaReflexiva(){
     for(int i = 0; i < numeroNos; i++){
         if(!matrizRelacoes[i][i]){
             if(indReflexiva){
-                fprintf(arquivoSaida, "F \n");
+                fprintf(arquivoSaida, "F\n");
                 indReflexiva = 0;
             }
             fprintf(arquivoSaida, "(%d,%d); ", listaElementos[i], listaElementos[i]);
@@ -42,7 +42,7 @@ int verificaIrreflexiva(){
     for(int i = 0; i < numeroNos; i++){
         if(matrizRelacoes[i][i]){
             if(indIrreflexiva){
-                fprintf(arquivoSaida, "F \n");
+                fprintf(arquivoSaida, "F\n");
                 indIrreflexiva = 0;
             }
             fprintf(arquivoSaida, "(%d,%d); ", listaElementos[i], listaElementos[i]); 
@@ -61,16 +61,12 @@ int verificaSimetrica(){
     fprintf(arquivoSaida, "\nSimétrica: ");
     for(int i = 0; i < numeroNos; i++){
         for(int j = 0; j < numeroNos; j++){
-            if(matrizRelacoes[i][j] != matrizRelacoes[j][i]){
+            if(matrizRelacoes[i][j] && !matrizRelacoes[j][i]){
                 if(indSimetrica){
-                    fprintf(arquivoSaida, "F \n");
+                    fprintf(arquivoSaida, "F\n");
                     indSimetrica = 0;
                 }
-                if(matrizRelacoes[i][j]){
-                    fprintf(arquivoSaida, "(%d,%d); ", listaElementos[i], listaElementos[j]);
-                }else if(matrizRelacoes[j][i]){
-                    fprintf(arquivoSaida, "(%d,%d); ", listaElementos[j], listaElementos[i]);
-                }
+                fprintf(arquivoSaida, "(%d,%d); ", listaElementos[j], listaElementos[i]);
                  
             }
         }
@@ -90,7 +86,7 @@ int verificaAntiSimetrica(){
         for(int j = i+1; j < numeroNos; j++){
             if(matrizRelacoes[i][j] && matrizRelacoes[j][i]){
                 if(indAntiSimetrica){
-                    fprintf(arquivoSaida, "F \n");
+                    fprintf(arquivoSaida, "F\n");
                     indAntiSimetrica = 0;
                 }
                 fprintf(arquivoSaida, "(%d,%d); (%d,%d); ",
@@ -130,11 +126,12 @@ int verificaTransitiva(){
     for(int i = 0; i < numeroNos; i++){
         for(int j = 0; j < numeroNos; j++){
             for(int z = 0; z < numeroNos; z++){
-                if((matrizRelacoes[i][j] == matrizRelacoes[j][z]) && !matrizRelacoes[i][z]){
+                if(matrizRelacoes[i][j] && matrizRelacoes[j][z] && !matrizRelacoes[i][z]){
                     if(indTransitiva){
-                        fprintf(arquivoSaida, "F \n");
+                        fprintf(arquivoSaida, "F\n");
                         indTransitiva = 0;
                     }
+                    fprintf(arquivoSaida, "(%d,%d); ", listaElementos[i], listaElementos[z]);
                     matrizRelacoes[i][z] = -1;
                 }
             }
@@ -142,7 +139,7 @@ int verificaTransitiva(){
     }
     
     if(indTransitiva){
-        fprintf(arquivoSaida, "V \n");
+        fprintf(arquivoSaida, "V");
     }
     return indTransitiva;
 }
@@ -194,18 +191,18 @@ int main(int argc, char **argv){
     int indAssimetrica = verificaAssimetrica();
     int indTransitiva = verificaTransitiva();
 
-    fprintf(arquivoSaida, "Relação de equivalência: ");
+    fprintf(arquivoSaida, "\nRelação de equivalência: ");
     if(indReflexiva && indSimetrica && indTransitiva){
-        fprintf(arquivoSaida, "V \n");
+        fprintf(arquivoSaida, "V\n");
     }else{
-        fprintf(arquivoSaida, "F \n");
+        fprintf(arquivoSaida, "F\n");
     }
 
     fprintf(arquivoSaida, "Relação de ordem parcial: ");
     if(indReflexiva && indAntiSimetrica && indTransitiva){
-        fprintf(arquivoSaida, "V \n");
+        fprintf(arquivoSaida, "V\n");
     }else{
-        fprintf(arquivoSaida, "F \n");
+        fprintf(arquivoSaida, "F\n");
     }
 
     //Imprime fecho transitivo da relação
