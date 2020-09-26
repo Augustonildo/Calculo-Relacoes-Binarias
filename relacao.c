@@ -1,25 +1,34 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int **matrizRelacoes;
 int *listaElementos;
 int numeroNos;
 
+void limpaValoresMatrizRelacoes(){
+    for(int i = 0; i < numeroNos; i++){
+        for(int j = 0; j < numeroNos; j++){
+            matrizRelacoes[i][j] = 0;
+        }
+    }
+}
+
 int verificaReflexiva(){
     int indReflexiva = 1;
 
-    //TODO: PRINT "1. Reflexiva: "
+    printf("1. Reflexiva: ");
     for(int i = 0; i < numeroNos; i++){
         if(!matrizRelacoes[i][i]){
             if(indReflexiva){
-                //TODO: Print "F \n"
+                printf("F \n   ");
                 indReflexiva = 0;
             }
-            //TODO: Print: "(" + listaElementos[i] + "," + listaElementos[i] + "); "; 
+            printf("(%d,%d); ", listaElementos[i], listaElementos[i]);
         }
     }
 
     if(indReflexiva){
-        //TODO: Print "V \n"
+        printf("V");
     }
     return indReflexiva;
 }
@@ -27,19 +36,19 @@ int verificaReflexiva(){
 int verificaIrreflexiva(){
     int indIrreflexiva = 1;
 
-    //TODO: Print "2. Irreflexiva: "
+    printf("\n2. Irreflexiva: ");
     for(int i = 0; i < numeroNos; i++){
         if(matrizRelacoes[i][i]){
             if(indIrreflexiva){
-                //TODO: Print "F \n"
+                printf("F \n   ");
                 indIrreflexiva = 0;
             }
-            //TODO: Print: "(" + listaElementos[i] + "," + listaElementos[i] + "); "; 
+            printf("(%d,%d); ", listaElementos[i], listaElementos[i]); 
         }
     }
 
     if(indIrreflexiva){
-        //TODO: Print "V \n"
+        printf("V");
     }
     return indIrreflexiva;
 }
@@ -47,18 +56,18 @@ int verificaIrreflexiva(){
 int verificaSimetrica(){
     int indSimetrica = 1;
 
-    //TODO: Print "3. Simetrica: "
+    printf("\n3. Simetrica: ");
     for(int i = 0; i < numeroNos; i++){
         for(int j = 0; j < numeroNos; j++){
             if(matrizRelacoes[i][j] != matrizRelacoes[j][i]){
                 if(indSimetrica){
-                    //TODO: Print "F \n"
+                    printf("F \n   ");
                     indSimetrica = 0;
                 }
                 if(matrizRelacoes[i][j]){
-                    //TODO: Print: "(" + listaElementos[i] + "," + listaElementos[j] + "); ";
+                    printf("(%d,%d); ", listaElementos[i], listaElementos[j]);
                 }else if(matrizRelacoes[j][i]){
-                    //TODO: Print: "(" + listaElementos[j] + "," + listaElementos[i] + "); ";
+                    printf("(%d,%d); ", listaElementos[j], listaElementos[i]);
                 }
                  
             }
@@ -66,7 +75,7 @@ int verificaSimetrica(){
     }
 
     if(indSimetrica){
-        //TODO: Print "V \n";
+        printf("V");
     }
     return indSimetrica;
 }
@@ -74,23 +83,24 @@ int verificaSimetrica(){
 int verificaAntiSimetrica(){
     int indAntiSimetrica = 1;
 
-    //TODO: Print "4. Anti-simetrica: "
+    printf("\n4. Anti-simetrica: ");
     for(int i = 0; i < numeroNos; i++){
         for(int j = 0; j < numeroNos; j++){
             if(i != j){
                 if(matrizRelacoes[i][j] == matrizRelacoes[j][i]){
                     if(indAntiSimetrica){
-                        //TODO: Print "F \n"
+                        printf("F \n   ");
                         indAntiSimetrica = 0;
                     }
-                    //TODO: Print: "(" + listaElementos[i] + "," + listaElementos[j] + ") e (" + listaElementos[j] + "," + listaElementos[i] + "); ";
+                    printf("(%d,%d) e (%d,%d); ",
+                        listaElementos[i], listaElementos[j], listaElementos[j], listaElementos[i]);
                 }
             }
         }
     }
 
     if(indAntiSimetrica){
-        //TODO: Print "V \n";
+        printf("V");
     }
     return indAntiSimetrica;
 }
@@ -98,61 +108,72 @@ int verificaAntiSimetrica(){
 int verificaAssimetrica(){
     int indAssimetrica = 1;
 
-    //TODO: Print "5. Assimetrica: "
+    printf("\n5. Assimetrica: ");
     for(int i = 0; i < numeroNos; i++){
         for(int j = 0; j < numeroNos; j++){
             if(matrizRelacoes[i][j] == matrizRelacoes[j][i]){
-                if(indAssimetrica){
-                    //TODO: Print "F \n"
-                    indAssimetrica = 0;
-                }
+                printf("F");
+                indAssimetrica = 0;
+                return indAssimetrica;
             }
         }
     }
 
-    if(indAssimetrica){
-        //TODO: Print "V \n";
-    }
+    printf("V");
     return indAssimetrica;
 }
 
 int verificaTransitiva(){
     int indTransitiva = 1;
 
-    //TODO: Print "4. Anti-simetrica: "
+    printf("\n6. Transitiva: ");
     for(int i = 0; i < numeroNos; i++){
         for(int j = 0; j < numeroNos; j++){
             for(int z = 0; z < numeroNos; z++){
                 if((matrizRelacoes[i][j] == matrizRelacoes[j][z]) && !matrizRelacoes[i][z]){
-                    if(indTransitiva){
-                        //TODO: Print "F \n"
-                        indTransitiva = 0;
-                    }
+                    printf("F \n");
+                    indTransitiva = 0;
+                    return indTransitiva;
                 }
             }
         }
     }
 
-    if(indTransitiva){
-        //TODO: Print "V \n";
-    }
+    printf("V \n");
     return indTransitiva;
 }
 
 
 
 int main(int argc, char **argv){
-    //TODO: Ler primeira linha, preencher numeroNos e listaElementos
+    //Começa leitura do arquivo entrada.txt
+    FILE* arquivo = fopen("entrada.txt", "r");
+
+    //Aloca espaço para matriz e vetor, preenchendo os elementos
+    fscanf(arquivo,"%d", &numeroNos);
+    listaElementos = (int *) malloc (sizeof(int) * numeroNos);
     matrizRelacoes = (int **) malloc (sizeof(int *) * numeroNos);
     for(int i = 0; i < numeroNos; i++){
+        fscanf(arquivo, " %d", &listaElementos[i]);
         matrizRelacoes[i] = (int *) malloc (sizeof(int) * numeroNos);
     }
+    limpaValoresMatrizRelacoes();
 
-    //TODO: LOOP para ler linha e preencher valor corresponde na matriz
+    //Lê relações e preenche matriz
+    int relacaoPontoA = 0;
+    int relacaoPontoB = 0;
+    while (!feof(arquivo))
+    {
+      fscanf(arquivo, "%d", &relacaoPontoA);
+      fscanf(arquivo, "%d", &relacaoPontoB);
+      matrizRelacoes[relacaoPontoA-listaElementos[0]][relacaoPontoB-listaElementos[0]] = 1;
+    }
 
+    //Finaliza leitura do arquivo de entrada
+    fclose(arquivo);
 
     //Realiza validações de características
-    //TODO: PRINT "Propriedades \n"
+    printf("Propriedades \n");
     int indReflexiva = verificaReflexiva();
     int indIrreflexiva = verificaIrreflexiva();
     int indSimetrica = verificaSimetrica();
@@ -160,20 +181,22 @@ int main(int argc, char **argv){
     int indAssimetrica = verificaAssimetrica();
     int indTransitiva = verificaTransitiva();
 
-    //TODO: Print "Relação de equivalência: "
+    printf("\nRelacao de equivalencia: ");
     if(indReflexiva && indSimetrica && indTransitiva){
-        //TODO: Print "V \n"
+        printf("V \n");
     }else{
-        //TODO: Print "F \n"
+        printf("F \n");
     }
 
-    //TODO: Print "Relação de ordem parcial: "
+    printf("Relacao de ordem parcial: ");
     if(indReflexiva && indAntiSimetrica && indTransitiva){
-        //TODO: Print "V \n"
+        printf("V \n");
     }else{
-        //TODO: Print "F \n"
+        printf("F \n");
     }
 
     //TODO: Imprimir fecho transitivo da relação
+
+    
     return 0;
 }
