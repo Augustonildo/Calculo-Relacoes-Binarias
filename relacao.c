@@ -148,7 +148,13 @@ int verificaTransitiva(){
 }
 
 void imprimeFechoTransitivo(){
-
+    for(int i = 0; i < numeroNos; i++){
+        for(int j = 0; j < numeroNos; j++){
+            if(matrizRelacoes[i][j] == 1 || matrizRelacoes[i][j] == -1){
+                fprintf(arquivoSaida, " (%d,%d);", listaElementos[i], listaElementos[j]);
+            }
+        }
+    }
 }
 
 
@@ -201,6 +207,10 @@ int main(int argc, char **argv){
     }else{
         fprintf(arquivoSaida, "F \n");
     }
+
+    //Imprime fecho transitivo da relação
+    fprintf(arquivoSaida, "Fecho transitivo da relação:");
+    imprimeFechoTransitivo();
 
     //Finaliza escrita no arquivo de saída
     fclose(arquivoSaida);
