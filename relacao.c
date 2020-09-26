@@ -23,6 +23,17 @@ void inicializaMatrizRelacoes(){
     }
 }
 
+void preencheMatrizRelacoes(){
+    int relacaoPontoA = 0;
+    int relacaoPontoB = 0;
+    while (!feof(arquivoEntrada))
+    {
+      fscanf(arquivoEntrada, "%d", &relacaoPontoA);
+      fscanf(arquivoEntrada, "%d", &relacaoPontoB);
+      matrizRelacoes[relacaoPontoA-listaElementos[0]][relacaoPontoB-listaElementos[0]] = 1;
+    }
+}
+
 int verificaReflexiva(){
     int indReflexiva = 1;
 
@@ -172,14 +183,7 @@ int main(int argc, char **argv){
     inicializaMatrizRelacoes();
 
     //Lê relações e preenche matriz
-    int relacaoPontoA = 0;
-    int relacaoPontoB = 0;
-    while (!feof(arquivoEntrada))
-    {
-      fscanf(arquivoEntrada, "%d", &relacaoPontoA);
-      fscanf(arquivoEntrada, "%d", &relacaoPontoB);
-      matrizRelacoes[relacaoPontoA-listaElementos[0]][relacaoPontoB-listaElementos[0]] = 1;
-    }
+    preencheMatrizRelacoes();
 
     //Finaliza leitura do arquivo de entrada
     fclose(arquivoEntrada);
