@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 FILE* arquivoEntrada;
-FILE* arquivoSaida;
 int **matrizRelacoes;
 int *listaElementos;
 int numeroNos;
@@ -37,19 +36,19 @@ void preencheMatrizRelacoes(){
 int verificaReflexiva(){
     int indReflexiva = 1;
 
-    fprintf(arquivoSaida, "Reflexiva: ");
+    printf("Reflexiva: ");
     for(int i = 0; i < numeroNos; i++){
         if(!matrizRelacoes[i][i]){
             if(indReflexiva){
-                fprintf(arquivoSaida, "F\n");
+                printf("F\n");
                 indReflexiva = 0;
             }
-            fprintf(arquivoSaida, "(%d,%d); ", listaElementos[i], listaElementos[i]);
+            printf("(%d,%d); ", listaElementos[i], listaElementos[i]);
         }
     }
 
     if(indReflexiva){
-        fprintf(arquivoSaida, "V");
+        printf("V");
     }
     return indReflexiva;
 }
@@ -57,19 +56,19 @@ int verificaReflexiva(){
 int verificaIrreflexiva(){
     int indIrreflexiva = 1;
 
-    fprintf(arquivoSaida, "\nIrreflexiva: ");
+    printf("\nIrreflexiva: ");
     for(int i = 0; i < numeroNos; i++){
         if(matrizRelacoes[i][i]){
             if(indIrreflexiva){
-                fprintf(arquivoSaida, "F\n");
+                printf("F\n");
                 indIrreflexiva = 0;
             }
-            fprintf(arquivoSaida, "(%d,%d); ", listaElementos[i], listaElementos[i]); 
+            printf("(%d,%d); ", listaElementos[i], listaElementos[i]); 
         }
     }
 
     if(indIrreflexiva){
-        fprintf(arquivoSaida, "V");
+        printf("V");
     }
     return indIrreflexiva;
 }
@@ -77,22 +76,22 @@ int verificaIrreflexiva(){
 int verificaSimetrica(){
     int indSimetrica = 1;
 
-    fprintf(arquivoSaida, "\nSimétrica: ");
+    printf("\nSimetrica: ");
     for(int i = 0; i < numeroNos; i++){
         for(int j = 0; j < numeroNos; j++){
             if(matrizRelacoes[i][j] && !matrizRelacoes[j][i]){
                 if(indSimetrica){
-                    fprintf(arquivoSaida, "F\n");
+                    printf("F\n");
                     indSimetrica = 0;
                 }
-                fprintf(arquivoSaida, "(%d,%d); ", listaElementos[j], listaElementos[i]);
+                printf("(%d,%d); ", listaElementos[j], listaElementos[i]);
                  
             }
         }
     }
 
     if(indSimetrica){
-        fprintf(arquivoSaida, "V");
+        printf("V");
     }
     return indSimetrica;
 }
@@ -100,22 +99,22 @@ int verificaSimetrica(){
 int verificaAntiSimetrica(){
     int indAntiSimetrica = 1;
 
-    fprintf(arquivoSaida, "\nAnti-simétrica: ");
+    printf("\nAnti-simetrica: ");
     for(int i = 0; i < numeroNos; i++){
         for(int j = i+1; j < numeroNos; j++){
             if(matrizRelacoes[i][j] && matrizRelacoes[j][i]){
                 if(indAntiSimetrica){
-                    fprintf(arquivoSaida, "F\n");
+                    printf("F\n");
                     indAntiSimetrica = 0;
                 }
-                fprintf(arquivoSaida, "(%d,%d); (%d,%d); ",
+                printf("(%d,%d); (%d,%d); ",
                     listaElementos[i], listaElementos[j], listaElementos[j], listaElementos[i]);
             }
         }
     }
 
     if(indAntiSimetrica){
-        fprintf(arquivoSaida, "V");
+        printf("V");
     }
     return indAntiSimetrica;
 }
@@ -123,34 +122,34 @@ int verificaAntiSimetrica(){
 int verificaAssimetrica(){
     int indAssimetrica = 1;
 
-    fprintf(arquivoSaida, "\nAssimétrica: ");
+    printf("\nAssimetrica: ");
     for(int i = 0; i < numeroNos; i++){
         for(int j = 0; j < numeroNos; j++){
             if(matrizRelacoes[i][j] == matrizRelacoes[j][i]){
-                fprintf(arquivoSaida, "F");
+                printf("F");
                 indAssimetrica = 0;
                 return indAssimetrica;
             }
         }
     }
 
-    fprintf(arquivoSaida, "V");
+    printf("V");
     return indAssimetrica;
 }
 
 int verificaTransitiva(){
     int indTransitiva = 1;
 
-    fprintf(arquivoSaida, "\nTransitiva: ");
+    printf("\nTransitiva: ");
     for(int i = 0; i < numeroNos; i++){
         for(int j = 0; j < numeroNos; j++){
             for(int z = 0; z < numeroNos; z++){
                 if(matrizRelacoes[i][j] && matrizRelacoes[j][z] && !matrizRelacoes[i][z]){
                     if(indTransitiva){
-                        fprintf(arquivoSaida, "F\n");
+                        printf("F\n");
                         indTransitiva = 0;
                     }
-                    fprintf(arquivoSaida, "(%d,%d); ", listaElementos[i], listaElementos[z]);
+                    printf("(%d,%d); ", listaElementos[i], listaElementos[z]);
                     matrizRelacoes[i][z] = -1;
                 }
             }
@@ -158,7 +157,7 @@ int verificaTransitiva(){
     }
     
     if(indTransitiva){
-        fprintf(arquivoSaida, "V");
+        printf("V");
     }
     return indTransitiva;
 }
@@ -167,7 +166,7 @@ void imprimeFechoTransitivo(){
     for(int i = 0; i < numeroNos; i++){
         for(int j = 0; j < numeroNos; j++){
             if(matrizRelacoes[i][j] == 1 || matrizRelacoes[i][j] == -1){
-                fprintf(arquivoSaida, " (%d,%d);", listaElementos[i], listaElementos[j]);
+                printf(" (%d,%d);", listaElementos[i], listaElementos[j]);
             }
         }
     }
@@ -177,7 +176,6 @@ void imprimeFechoTransitivo(){
 int main(int argc, char **argv){
     //Começa leitura do arquivo entrada.txt
     arquivoEntrada = fopen("entrada.txt", "r");
-    arquivoSaida = fopen("saida.txt", "w");
 
     //Aloca espaço para matriz e vetor, preenchendo os elementos
     inicializaMatrizRelacoes();
@@ -196,25 +194,23 @@ int main(int argc, char **argv){
     int indAssimetrica = verificaAssimetrica();
     int indTransitiva = verificaTransitiva();
 
-    fprintf(arquivoSaida, "\nRelação de equivalência: ");
+    printf("\nRelacao de equivalencia: ");
     if(indReflexiva && indSimetrica && indTransitiva){
-        fprintf(arquivoSaida, "V\n");
+        printf("V\n");
     }else{
-        fprintf(arquivoSaida, "F\n");
+        printf("F\n");
     }
 
-    fprintf(arquivoSaida, "Relação de ordem parcial: ");
+    printf("Relacao de ordem parcial: ");
     if(indReflexiva && indAntiSimetrica && indTransitiva){
-        fprintf(arquivoSaida, "V\n");
+        printf("V\n");
     }else{
-        fprintf(arquivoSaida, "F\n");
+        printf("F\n");
     }
 
     //Imprime fecho transitivo da relação
-    fprintf(arquivoSaida, "Fecho transitivo da relação:");
+    printf("Fecho transitivo da relacao:");
     imprimeFechoTransitivo();
-
-    //Finaliza escrita no arquivo de saída
-    fclose(arquivoSaida);
+    
     return 0;
 }
