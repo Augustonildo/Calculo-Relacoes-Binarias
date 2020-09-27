@@ -2,7 +2,7 @@ Para executar o programa de verificação de relações binárias, os seguintes 
 
 1. No terminal, execute o comando "gcc -g relacao.c -o relacao" para criar, no mesmo diretório, um arquivo executável.
 2. No mesmo diretório, deverá ser criado um arquivo chamado "entrada.txt" com os valores de entrada para cada execução.
-3. A saída será registrada no arquivo "saida.txt". Não é necessário excluí-lo antes de realizar uma nova execução, mas é importante não executar o programa com o arquivo aberto, pois pode haver conflito de acesso ao arquivo.
+3. A saída será registrada no terminal.
 4. Execute o arquivo executável "relacao". Divirta-se!
 
 Para verificar casos de exemplo e o próprio arquivo executável, é só acessar o repositório no github: https://github.com/Augustonildo/Calculo_Relacoes_Binarias
