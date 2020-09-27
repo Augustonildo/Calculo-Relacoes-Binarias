@@ -125,7 +125,7 @@ int verificaAssimetrica(){
     printf("\nAssimetrica: ");
     for(int i = 0; i < numeroNos; i++){
         for(int j = 0; j < numeroNos; j++){
-            if(matrizRelacoes[i][j] == matrizRelacoes[j][i]){
+            if(matrizRelacoes[i][j] && matrizRelacoes[j][i]){
                 printf("F");
                 indAssimetrica = 0;
                 return indAssimetrica;
